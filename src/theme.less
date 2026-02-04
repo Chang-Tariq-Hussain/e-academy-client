@@ -3,7 +3,29 @@
 // For more information: https://ng.ant.design/docs/customize-theme/en
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
 
-// Override less variables to here
-// View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
+@primary-color: #4547D2;                    // main brand color (buttons, links, selected states)
 
-// @primary-color: #1890ff;
+// Border
+@border-color-base: #B7B7B7;                // most borders (input, card, table, etc.)
+@border-color-split: #B7B7B7;               // table divider, menu split, etc.
+
+// Text / Gray scale
+@text-color: #101010;                       // primary text (headings, strong content)
+@text-color-secondary: #626262;             // secondary text, labels, placeholders
+@disabled-color: fade(@text-color-secondary, 40%);  // disabled state
+
+// Backgrounds (clean & modern look)
+@background-color-base: #fff;               // most component backgrounds
+@component-background: #fff;                // cards, popovers, modals
+@body-background: #fff;                     // page background (or use #f8f9fa if you want very light gray)
+
+// Optional – make it feel more premium/modern
+@border-radius-base: 6px;                   // slightly rounded (default is 2–4px)
+@border-radius-sm: 4px;
+
+// Success/info/warning/error can inherit from primary or stay default
+// @success-color: #52c41a;                 // keep default or change
+// @link-color: #4547D2;                    // usually same as primary
+
+// Optional: heading colors stronger
+@heading-color: #101010;
