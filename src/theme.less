@@ -6,8 +6,8 @@
 @primary-color: #4547D2;                    // main brand color (buttons, links, selected states)
 
 // Border
-@border-color-base: #B7B7B7;                // most borders (input, card, table, etc.)
-@border-color-split: #B7B7B7;               // table divider, menu split, etc.
+@border-color-base: #E1E1E1;                // most borders (input, card, table, etc.)
+@border-color-split: #E1E1E1;               // table divider, menu split, etc.
 
 // Text / Gray scale
 @text-color: #101010;                       // primary text (headings, strong content)
@@ -20,8 +20,9 @@
 @body-background: #fff;                     // page background (or use #f8f9fa if you want very light gray)
 
 // Optional – make it feel more premium/modern
-@border-radius-base: 6px;                   // slightly rounded (default is 2–4px)
-@border-radius-sm: 4px;
+@border-radius-base: 8px;
+@border-radius-sm: 6px;
+@border-radius-lg: 10px;
 
 // Success/info/warning/error can inherit from primary or stay default
 // @success-color: #52c41a;                 // keep default or change
@@ -29,3 +30,28 @@
 
 // Optional: heading colors stronger
 @heading-color: #101010;
+
+// Input Specific
+@input-height-base: 48px;          // default ~32px
+@input-height-lg: 52px;
+@input-height-sm: 36px;
+
+@input-padding-horizontal-base: 12px;
+@input-font-size: 15px;
+@input-border-color: #E1E1E1;
+@input-hover-border-color: #4547D2;
+@input-active-border-color: #4547D2;
+@input-bg: #fff;
+
+@input-border-radius-base: 8px;
+@border-radius-base: 8px;
+@border-radius-sm:   6px;
+@border-radius-lg:   10px;
+
+.ant-input-group .ant-input {
+  border-radius: @input-border-radius-base !important;
+}
+
+.ant-select {
+  width: 100% !important;
+}

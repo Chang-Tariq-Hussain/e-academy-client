@@ -1,0 +1,22 @@
+:root {
+  // Core colors – map your Less values to CSS vars
+  --ant-primary-color: #4547d2;
+  --ant-primary-color-hover: color.adjust(#4547d2, $lightness: 8%);
+  --ant-primary-color-active: color.adjust(#4547d2, $lightness: -10%);
+
+  --ant-border-color: #e1e1e1;
+  --ant-border-color-split: #e1e1e1;
+
+  --ant-text-color: #101010;
+  --ant-text-color-secondary: #626262;
+  --ant-disabled-color: rgba(98, 98, 98, 0.4); // ≈ fade(#626262, 40%)
+
+  --ant-color-bg-container: #ffffff;
+  --ant-color-bg-base: #ffffff;
+  --ant-color-bg-elevated: #ffffff; // cards, modals, etc.
+
+  --ant-border-radius-base: 6px;
+  --ant-border-radius-sm: 4px;
+
+  // You can override more — see full list below
+}

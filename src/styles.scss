@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/theme-variables.scss';
+
+.full-width-button {
+  .ant-btn {
+    width: 100% !important;
+  }
+}
+
+.ant-divider-horizontal {
+  margin: 16px 0 !important;
+}
+
+.text-gray {
+  color: var(--ant-text-color-secondary, #626262);
+}
+
+.text-blue {
+  color: var(--ant-primary-color);
+}

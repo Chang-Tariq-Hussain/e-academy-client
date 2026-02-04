@@ -8,6 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   selector: 'app-nz-button',
   standalone: true,
   imports: [CommonModule, NzButtonModule, NzIconModule],
+  styleUrl: './nz-button-wrapper.scss',
   template: `
     <button
       nz-button

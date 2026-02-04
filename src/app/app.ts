@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { NzButtonWrapperComponent } from './shared/ui/nz-button-wrapper/nz-button-wrapper.component';
-import { NzInputWrapperComponent } from './shared/ui/nz-input-wrapper/nz-input-wrapper.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [NzButtonWrapperComponent, NzInputWrapperComponent],
+  imports: [RouterModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

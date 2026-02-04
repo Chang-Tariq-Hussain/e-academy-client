@@ -1,0 +1,27 @@
+<section>
+  <div class="left">
+    <img [src]="imageUrl()" alt="Registration page illustration" />
+
+    <!-- <img src="/assets/register.jpg" alt="Registration page illustration" /> -->
+  </div>
+  <div class="right">
+    <h2>E-Academy</h2>
+    <h3>Sign In</h3>
+
+    <form>
+      <app-nz-input type="email" placeholder="Enter Email" />
+      <app-nz-input type="password" placeholder="Enter Password" />
+      <nz-divider nzType="horizontal" />
+      <app-nz-select
+        [options]="roleOptions"
+        placeholder="Choose a role"
+        [(value)]="selectedRole"
+        (valueChange)="onRoleChange($event)"
+      ></app-nz-select>
+      <p class="text-gray">
+        Don't have an account? <a class="text-blue" routerLink="/register">register</a>
+      </p>
+      <app-nz-button type="primary" size="large" class="full-width-button">Sign In</app-nz-button>
+    </form>
+  </div>
+</section>
