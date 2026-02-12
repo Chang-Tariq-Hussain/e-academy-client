@@ -1,31 +1,40 @@
 <section>
   <div class="left">
-    <!-- This will now work -->
-    <!-- <img [src]="imageUrl()" alt="Registration page illustration" /> -->
-
-    <!-- Or even simpler (no binding needed) -->
     <img src="/assets/register.jpg" alt="Registration page illustration" />
   </div>
   <div class="right">
-    <h2>E-Academy</h2>
+    <img [src]="logoUrl" alt="Logo" class="logo-img" />
     <h3>Sign Up</h3>
 
-    <form>
-      <app-nz-input type="text" placeholder="Enter Full Name" />
-      <app-nz-input type="email" placeholder="Enter Email" />
-      <app-nz-input type="password" placeholder="Enter Password" />
-      <app-nz-input type="password" placeholder="Confirm Password" />
+    <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+      <!-- Using formControlName directive -->
+      <app-nz-input type="text" placeholder="Enter Full Name" formControlName="fullname" />
+
+      <app-nz-input type="email" placeholder="Enter Email" formControlName="email" />
+
+      <app-nz-input type="password" placeholder="Enter Password" formControlName="password" />
+
+      <app-nz-input
+        type="password"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+      />
+
       <nz-divider nzType="horizontal" />
+
       <app-nz-select
         [options]="roleOptions"
         placeholder="Choose a role"
-        [(value)]="selectedRole"
-        (valueChange)="onRoleChange($event)"
+        formControlName="role"
       ></app-nz-select>
+
       <p class="text-gray">
         Already have an account? <a class="text-blue" routerLink="/login">login</a>
       </p>
-      <app-nz-button type="primary" size="large" class="full-width-button">Sign Up</app-nz-button>
+
+      <app-nz-button type="primary" size="large" class="full-width-button" htmlType="submit">
+        Sign Up
+      </app-nz-button>
     </form>
   </div>
 </section>

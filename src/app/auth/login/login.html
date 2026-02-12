@@ -5,19 +5,15 @@
     <!-- <img src="/assets/register.jpg" alt="Registration page illustration" /> -->
   </div>
   <div class="right">
-    <h2>E-Academy</h2>
+    <img [src]="logoUrl()" alt="Logo" class="logo-img" />
     <h3>Sign In</h3>
 
-    <form>
+    <form novalidate>
       <app-nz-input type="email" placeholder="Enter Email" />
       <app-nz-input type="password" placeholder="Enter Password" />
+
       <nz-divider nzType="horizontal" />
-      <app-nz-select
-        [options]="roleOptions"
-        placeholder="Choose a role"
-        [(value)]="selectedRole"
-        (valueChange)="onRoleChange($event)"
-      ></app-nz-select>
+      <app-nz-select [options]="roleOptions" placeholder="Choose a role"></app-nz-select>
       <p class="text-gray">
         Don't have an account? <a class="text-blue" routerLink="/register">register</a>
       </p>

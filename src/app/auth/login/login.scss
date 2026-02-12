@@ -4,6 +4,9 @@ section {
   .left {
     flex: 70%;
     border-right: 1px solid var(--ant-border-color-split, #e1e1e1);
+    height: 100vh;
+    position: sticky;
+    top: 0;
 
     img {
       width: 100%;
@@ -18,9 +21,6 @@ section {
     overflow-y: scroll;
     min-height: 100vh;
 
-    h2 {
-      color: var(--ant-primary-color);
-    }
     h3 {
       padding: 1rem 0;
     }

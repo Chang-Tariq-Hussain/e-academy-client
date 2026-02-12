@@ -1,7 +1,8 @@
 // src/app/shared/ui/nz-select-wrapper/nz-select-wrapper.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, input, model, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, input, model } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // ← for ngModel
+import { FormValueControl } from '@angular/forms/signals'; // ← key import
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface SelectOption<T = any> {
@@ -20,9 +21,9 @@ export interface SelectOption<T = any> {
       [nzDisabled]="disabled()"
       [nzAllowClear]="allowClear()"
       [nzMode]="mode()"
+      [ngModel]="value()"
+      (ngModelChange)="value.set($event)"
       [nzShowSearch]="showSearch()"
-      [(ngModel)]="value"
-      (ngModelChange)="valueChange.emit($event)"
     >
       @for (opt of options(); track opt.value) {
         <nz-option
@@ -34,15 +35,15 @@ export interface SelectOption<T = any> {
     </nz-select>
   `,
 })
-export class NzSelectWrapperComponent<T = any> {
+export class NzSelectWrapperComponent<T = any> implements FormValueControl<T | T[] | null> {
+  // This makes it compatible with formControlName / formControl
   value = model<T | T[] | null>(null);
 
+  // Inputs
   options = input.required<SelectOption<T>[]>();
   placeholder = input<string>('Please select');
   disabled = input<boolean>(false);
   allowClear = input<boolean>(true);
   showSearch = input<boolean>(true);
   mode = input<'default' | 'multiple' | 'tags'>('default');
-
-  valueChange = output<T | T[] | null>();
 }
