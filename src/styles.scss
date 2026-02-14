@@ -22,3 +22,15 @@
   height: 120px;
   object-fit: cover;
 }
+
+.ant-form-item {
+  margin-bottom: 12px !important;
+}
+
+.error-messages {
+  margin-top: 4px;
+}
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+}

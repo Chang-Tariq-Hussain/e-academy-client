@@ -3,126 +3,132 @@ import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
-  input,
-  Optional,
-  output,
-  Self,
+  inject,
+  Injector,
+  Input,
+  signal,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-
-type InputType = 'text' | 'number' | 'password' | 'email';
 
 @Component({
   selector: 'app-nz-input',
   standalone: true,
-  imports: [CommonModule, FormsModule, NzInputModule, NzIconModule],
+  imports: [CommonModule, NzInputModule, NzIconModule, ReactiveFormsModule],
   template: `
     <nz-input-group
-      [nzPrefixIcon]="prefixIcon()"
-      [nzSuffixIcon]="suffixIcon()"
-      [nzAddOnBefore]="addonBefore()"
-      [nzAddOnAfter]="addonAfter()"
-      [nzStatus]="ngControl?.invalid && ngControl?.touched ? 'error' : ''"
+      [nzPrefixIcon]="prefixIcon"
+      [nzSuffixIcon]="suffixIcon"
+      [nzAddOnBefore]="addonBefore"
+      [nzAddOnAfter]="addonAfter"
     >
       <input
         nz-input
-        [type]="type()"
-        [placeholder]="placeholder()"
+        [type]="type"
+        [placeholder]="placeholder"
         [disabled]="disabled()"
-        [readonly]="readonly()"
-        [value]="value"
+        [readonly]="readonly"
+        [value]="value()"
         (input)="onInput($event)"
         (blur)="onBlur()"
       />
     </nz-input-group>
 
-    <!-- Error messages -->
-    <div *ngIf="ngControl?.invalid && ngControl?.touched" class="error-messages">
-      <div *ngIf="ngControl?.errors?.['required']" class="error-message">
-        This field is required
+    @if (shouldShowErrors()) {
+      <div class="error-messages">
+        @if (control?.hasError('required')) {
+          <div class="error-message">This field is required</div>
+        }
+        @if (control?.hasError('email')) {
+          <div class="error-message">Please enter a valid email</div>
+        }
+        <!-- add more -->
       </div>
-      <div *ngIf="ngControl?.errors?.['email']" class="error-message">
-        Please enter a valid email
-      </div>
-      <!-- Add more error types as needed -->
-    </div>
+    }
   `,
-  styles: [
-    `
-      .error-messages {
-        margin-top: 4px;
-      }
-      .error-message {
-        color: #ff4d4f;
-        font-size: 12px;
-      }
-    `,
-  ],
+  styles: `
+    .error-messages {
+      margin-top: 4px;
+    }
+    .error-message {
+      color: #ff4d4f;
+      font-size: 12px;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NzInputWrapperComponent),
+      useExisting: forwardRef(() => AppNzInputComponent),
       multi: true,
     },
   ],
 })
-export class NzInputWrapperComponent implements ControlValueAccessor {
-  // Input properties
-  type = input<InputType>('text');
-  placeholder = input<string>('');
-  disabled = input<boolean>(false);
-  readonly = input<boolean>(false);
-  prefixIcon = input<string | null>(null);
-  suffixIcon = input<string | null>(null);
-  addonBefore = input<string | undefined>(undefined);
-  addonAfter = input<string | undefined>(undefined);
+export class AppNzInputComponent implements ControlValueAccessor {
+  // Make these signals if you want reactivity / .set()
+  // Otherwise keep as normal properties
+  @Input() prefixIcon?: string;
+  @Input() suffixIcon?: string;
+  @Input() addonBefore?: string;
+  @Input() addonAfter?: string;
+  @Input() placeholder = '';
+  @Input() type: string = 'text';
+  @Input() readonly = false;
 
-  // Outputs
-  blur = output<void>();
+  value = signal<string>('');
+  disabled = signal<boolean>(false);
 
-  // Internal state
-  value: any = '';
-  onChange: (value: any) => void = () => {};
-  onTouched: () => void = () => {};
+  private onChange: (val: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
-  // Inject NgControl to get form control
-  constructor(@Optional() @Self() public ngControl: NgControl) {
-    if (this.ngControl) {
-      this.ngControl.valueAccessor = this;
+  // Inject NgControl safely
+  private injector = inject(Injector);
+  control?: NgControl;
+
+  ngOnInit() {
+    // Avoid circular DI
+    const ngControl = this.injector.get(NgControl, null, { self: true, optional: true });
+    if (ngControl) {
+      this.control = ngControl;
+      // Important: prevent double binding / ExpressionChanged errors
+      ngControl.valueAccessor = this;
     }
   }
 
-  // Handle input events
-  onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const newValue = input.value;
-    this.value = newValue;
-    this.onChange(newValue);
+  // Helper to decide when to show errors (mimics common pattern)
+  shouldShowErrors(): boolean {
+    return !!this.control?.invalid && !!this.control?.touched;
   }
 
-  // Handle blur events
-  onBlur(): void {
-    this.onTouched();
-    this.blur.emit();
+  writeValue(value: string | null): void {
+    this.value.set(value ?? '');
   }
 
-  // ControlValueAccessor implementation
-  writeValue(value: any): void {
-    this.value = value || '';
-  }
-
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
-    // Handle disabled state if needed
+    this.disabled.set(isDisabled);
+  }
+
+  onInput(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.value.set(val);
+    this.onChange(val);
+  }
+
+  onBlur(): void {
+    this.onTouched();
   }
 }

@@ -13,7 +13,11 @@
       <app-nz-input type="password" placeholder="Enter Password" />
 
       <nz-divider nzType="horizontal" />
-      <app-nz-select [options]="roleOptions" placeholder="Choose a role"></app-nz-select>
+      <app-nz-select
+        [options]="roleOptions"
+        placeholder="Choose a role"
+        formControlName="role"
+      ></app-nz-select>
       <p class="text-gray">
         Don't have an account? <a class="text-blue" routerLink="/register">register</a>
       </p>

@@ -1,37 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
+  FormControl,
   FormGroup,
+  ReactiveFormsModule,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+// import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-button-wrapper.component';
-import { NzInputWrapperComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
+import { AppNzInputComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
 import {
   NzSelectWrapperComponent,
   SelectOption,
 } from '../../shared/ui/nz-select-wrapper/nz-select-wrapper.component';
-
 @Component({
   selector: 'app-register',
   imports: [
-    NzInputWrapperComponent,
+    NzFormModule,
     NzButtonWrapperComponent,
     NzDividerModule,
+    AppNzInputComponent,
+    // NzSelectWrapperComponent,
+    ReactiveFormsModule,
+    CommonModule,
     NzSelectWrapperComponent,
-    RouterLink,
+    NzIconModule,
+    // RouterLink,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
-export class Register implements OnInit {
+export class Register {
   imageUrl = '/assets/register.jpg';
   logoUrl = '/assets/e-academy-logo.png';
 
-  registerForm!: FormGroup;
+  registerForm = new FormGroup(
+    {
+      fullname: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+
+      email: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.email],
+      }),
+
+      password: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+
+      confirmPassword: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+
+      role: new FormControl('Select your role', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    },
+    { validators: this.passwordsMatchValidator },
+  );
 
   roleOptions: SelectOption<string>[] = [
     { value: 'admin', label: 'Admin' },
@@ -40,64 +76,35 @@ export class Register implements OnInit {
     { value: 'instructor', label: 'Instructor' },
   ];
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.initializeForm();
-  }
-
-  initializeForm(): void {
-    this.registerForm = this.fb.group(
-      {
-        fullname: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
-        role: ['', [Validators.required]],
-      },
-      {
-        validators: this.passwordMatchValidator,
-      },
-    );
-  }
-
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: 'Passwords do not match' });
-      return { passwordMismatch: true };
-    }
-
-    return null;
-  }
-
-  handleSubmit(): void {
+  onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Form submitted:', this.registerForm.value);
-      console.log('Fullname:', this.registerForm.get('fullname')?.value);
-      console.log('Email:', this.registerForm.get('email')?.value);
-      console.log('Password:', this.registerForm.get('password')?.value);
-      console.log('Role:', this.registerForm.get('role')?.value);
-
-      // Get all errors
-      console.log('Form errors:', this.registerForm.errors);
-
-      // Get specific field errors
-      Object.keys(this.registerForm.controls).forEach((key) => {
-        const control = this.registerForm.get(key);
-        if (control?.errors) {
-          console.log(`${key} errors:`, control.errors);
-        }
-      });
+      console.log('Submitted:', this.registerForm.value);
+      // → call your service here
     } else {
-      console.log('Form is invalid');
-
-      // Mark all fields as touched to show errors
-      Object.values(this.registerForm.controls).forEach((control) => {
-        control.markAsTouched();
-      });
+      this.registerForm.markAllAsTouched();
     }
+  }
+
+  private passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  }
+
+  get fullname() {
+    return this.registerForm.get('fullname')!;
+  }
+  get email() {
+    return this.registerForm.get('email')!;
+  }
+  get password() {
+    return this.registerForm.get('password')!;
+  }
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword')!;
+  }
+  get role() {
+    return this.registerForm.get('role')!;
   }
 }

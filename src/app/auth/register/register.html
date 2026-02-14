@@ -6,34 +6,98 @@
     <img [src]="logoUrl" alt="Logo" class="logo-img" />
     <h3>Sign Up</h3>
 
-    <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
-      <!-- Using formControlName directive -->
-      <app-nz-input type="text" placeholder="Enter Full Name" formControlName="fullname" />
+    <form
+      nz-form
+      nzLayout="vertical"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="my-form"
+    >
+      <!-- Full Name -->
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Full Name</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="fullname">
+          <app-nz-input
+            formControlName="fullname"
+            placeholder="Enter your full name"
+            suffixIcon="user"
+          ></app-nz-input>
+        </nz-form-control>
+      </nz-form-item>
 
-      <app-nz-input type="email" placeholder="Enter Email" formControlName="email" />
+      <!-- Email -->
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Email</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="email">
+          <app-nz-input
+            formControlName="email"
+            type="email"
+            placeholder="your@email.com"
+            suffixIcon="mail"
+          ></app-nz-input>
+        </nz-form-control>
+      </nz-form-item>
 
-      <app-nz-input type="password" placeholder="Enter Password" formControlName="password" />
+      <!-- Password -->
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Password</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="password">
+          <app-nz-input
+            formControlName="password"
+            type="password"
+            placeholder="Enter password (min 8 characters)"
+            suffixIcon="eye"
+          ></app-nz-input>
+        </nz-form-control>
+      </nz-form-item>
 
-      <app-nz-input
-        type="password"
-        placeholder="Confirm Password"
-        formControlName="confirmPassword"
-      />
+      <!-- Confirm Password -->
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Confirm Password</nz-form-label>
+        <nz-form-control
+          nzHasFeedback
+          [nzValidateStatus]="confirmPassword"
+          [nzErrorTip]="confirmError"
+        >
+          <app-nz-input
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Confirm your password"
+            suffixIcon="eye"
+          ></app-nz-input>
 
-      <nz-divider nzType="horizontal" />
+          <div
+            *ngIf="confirmPassword.touched && registerForm.errors?.['passwordsMismatch']"
+            class="error-message"
+          >
+            Passwords do not match
+          </div>
 
-      <app-nz-select
-        [options]="roleOptions"
-        placeholder="Choose a role"
-        formControlName="role"
-      ></app-nz-select>
+          <ng-template #confirmError let-control>
+            <ng-container *ngIf="control?.errors?.['required']">
+              Please confirm your password
+            </ng-container>
+            <ng-container *ngIf="control?.errors?.['mismatch']">
+              Passwords do not match
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
 
-      <p class="text-gray">
-        Already have an account? <a class="text-blue" routerLink="/login">login</a>
-      </p>
+      <nz-divider></nz-divider>
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Role</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="role">
+          <app-nz-select
+            [options]="roleOptions"
+            placeholder="Choose a role"
+            formControlName="role"
+          ></app-nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-      <app-nz-button type="primary" size="large" class="full-width-button" htmlType="submit">
-        Sign Up
+      <app-nz-button type="primary" size="large" [disabled]="registerForm.invalid">
+        Register
       </app-nz-button>
     </form>
   </div>

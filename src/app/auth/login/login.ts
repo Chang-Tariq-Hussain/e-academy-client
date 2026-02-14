@@ -4,7 +4,7 @@ import { form, required } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-button-wrapper.component';
-import { NzInputWrapperComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
+import { AppNzInputComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
 import {
   NzSelectWrapperComponent,
   SelectOption,
@@ -13,7 +13,7 @@ import {
 @Component({
   selector: 'app-login',
   imports: [
-    NzInputWrapperComponent,
+    AppNzInputComponent,
     NzButtonWrapperComponent,
     NzDividerModule,
     NzSelectWrapperComponent,
