@@ -8,20 +8,51 @@
     <img [src]="logoUrl()" alt="Logo" class="logo-img" />
     <h3>Sign In</h3>
 
-    <form novalidate>
-      <app-nz-input type="email" placeholder="Enter Email" />
-      <app-nz-input type="password" placeholder="Enter Password" />
+    <form
+      nz-form
+      nzLayout="vertical"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="my-form"
+    >
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Email</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="emailControl">
+          <app-nz-input
+            formControlName="email"
+            type="email"
+            placeholder="your@email.com"
+            suffixIcon="mail"
+          ></app-nz-input>
+        </nz-form-control>
+      </nz-form-item>
 
-      <nz-divider nzType="horizontal" />
-      <app-nz-select
-        [options]="roleOptions"
-        placeholder="Choose a role"
-        formControlName="role"
-      ></app-nz-select>
-      <p class="text-gray">
-        Don't have an account? <a class="text-blue" routerLink="/register">register</a>
-      </p>
-      <app-nz-button type="primary" size="large" class="full-width-button">Sign In</app-nz-button>
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Password</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="passwordControl">
+          <app-nz-input
+            formControlName="password"
+            type="password"
+            placeholder="Enter your password"
+            suffixIcon="eye"
+          ></app-nz-input>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-divider></nz-divider>
+      <nz-form-item>
+        <nz-form-label [nzRequired]="true">Role</nz-form-label>
+        <nz-form-control nzHasFeedback [nzValidateStatus]="roleControl">
+          <app-nz-select
+            [options]="roleOptions"
+            placeholder="Choose a role"
+            formControlName="role"
+          ></app-nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <app-nz-button type="primary" size="large" htmlType="submit"> Login </app-nz-button>
+      <p class="text-gray">Already have an account? <a routerLink="/register">Register</a></p>
     </form>
   </div>
 </section>

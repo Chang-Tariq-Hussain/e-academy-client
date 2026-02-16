@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { form, required } from '@angular/forms/signals';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-button-wrapper.component';
 import { AppNzInputComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
 import {
@@ -13,12 +15,15 @@ import {
 @Component({
   selector: 'app-login',
   imports: [
-    AppNzInputComponent,
+    NzFormModule,
     NzButtonWrapperComponent,
     NzDividerModule,
-    NzSelectWrapperComponent,
-    RouterLink,
+    AppNzInputComponent,
     ReactiveFormsModule,
+    CommonModule,
+    NzSelectWrapperComponent,
+    NzIconModule,
+    RouterLink,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
@@ -27,15 +32,19 @@ export class Login {
   imageUrl = signal('/assets/login.jpg');
   logoUrl = signal('/assets/e-academy-logo.png');
 
-  loginModel = signal({
-    email: '',
-    password: '',
-    role: '',
-  });
-  registrationForm = form(this.loginModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Email is required' });
-    required(schemaPath.password, { message: 'Password is required' });
-    required(schemaPath.role, { message: 'You must select the role' });
+  loginForm = new FormGroup({
+    email: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    role: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   roleOptions: SelectOption<string>[] = [
@@ -45,9 +54,23 @@ export class Login {
     { value: 'instructor', label: 'Instructor' },
   ];
 
-  selectedRole: string | string[] | null = null;
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      console.log('login form submitted: ', this.loginForm.value);
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
 
-  onRoleChange(role: string | string[] | null) {
-    console.log('Role changed:', role);
+  get emailControl() {
+    return this.loginForm.controls.email;
+  }
+
+  get passwordControl() {
+    return this.loginForm.controls.password;
+  }
+
+  get roleControl() {
+    return this.loginForm.controls.role;
   }
 }

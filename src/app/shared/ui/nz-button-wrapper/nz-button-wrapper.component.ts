@@ -27,6 +27,7 @@ import { AppNzInputComponent } from '../nz-input-wrapper/nz-input-wrapper.compon
       [nzDanger]="danger()"
       (click)="click.emit($event)"
       [disabled]="disabled()"
+      type="htmlType()"
       class="my-btn"
     >
       @if (icon()) {
@@ -46,6 +47,7 @@ import { AppNzInputComponent } from '../nz-input-wrapper/nz-input-wrapper.compon
 })
 export class NzButtonWrapperComponent implements ControlValueAccessor {
   type = input<'primary' | 'default' | 'dashed' | 'text' | 'link'>('default');
+  htmlType = input<'button' | 'submit' | 'reset' | 'button'>;
   size = input<NzSizeLDSType>('default');
   loading = input<boolean>(false);
   danger = input<boolean>(false);

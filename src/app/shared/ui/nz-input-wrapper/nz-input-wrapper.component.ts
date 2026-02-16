@@ -5,11 +5,14 @@ import {
   forwardRef,
   inject,
   Injector,
+  input,
   Input,
   signal,
 } from '@angular/core';
 import {
+  ControlContainer,
   ControlValueAccessor,
+  FormGroupDirective,
   NG_VALUE_ACCESSOR,
   NgControl,
   ReactiveFormsModule,
@@ -37,6 +40,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
         [value]="value()"
         (input)="onInput($event)"
         (blur)="onBlur()"
+        [formControlName]="formControlName()"
       />
     </nz-input-group>
 
@@ -62,6 +66,12 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -80,6 +90,7 @@ export class AppNzInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() type: string = 'text';
   @Input() readonly = false;
+  formControlName = input.required<string>();
 
   value = signal<string>('');
   disabled = signal<boolean>(false);

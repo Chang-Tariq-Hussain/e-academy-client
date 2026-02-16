@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 // import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -30,7 +31,7 @@ import {
     CommonModule,
     NzSelectWrapperComponent,
     NzIconModule,
-    // RouterLink,
+    RouterLink,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -61,7 +62,7 @@ export class Register {
         validators: [Validators.required],
       }),
 
-      role: new FormControl('Select your role', {
+      role: new FormControl('', {
         nonNullable: true,
         validators: [Validators.required],
       }),
