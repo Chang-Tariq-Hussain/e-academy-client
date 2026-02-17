@@ -27,13 +27,13 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   template: `
     <nz-input-group
       [nzPrefixIcon]="prefixIcon"
-      [nzSuffixIcon]="suffixIcon"
       [nzAddOnBefore]="addonBefore"
       [nzAddOnAfter]="addonAfter"
+      [nzSuffix]="suffixTemplate"
     >
       <input
         nz-input
-        [type]="type"
+        [type]="inputType"
         [placeholder]="placeholder"
         [disabled]="disabled()"
         [readonly]="readonly"
@@ -43,6 +43,21 @@ import { NzInputModule } from 'ng-zorro-antd/input';
         [formControlName]="formControlName()"
       />
     </nz-input-group>
+
+    <ng-template #suffixTemplate>
+      @if (type === 'password') {
+        <span
+          nz-icon
+          [nzType]="isPasswordVisible() ? 'eye-invisible' : 'eye'"
+          class="cursor-pointer"
+          (click)="togglePassword()"
+        ></span>
+      } @else {
+        @if (suffixIcon) {
+          <span nz-icon [nzType]="suffixIcon"></span>
+        }
+      }
+    </ng-template>
 
     @if (shouldShowErrors()) {
       <div class="error-messages">
@@ -94,6 +109,7 @@ export class AppNzInputComponent implements ControlValueAccessor {
 
   value = signal<string>('');
   disabled = signal<boolean>(false);
+  isPasswordVisible = signal(false);
 
   private onChange: (val: string) => void = () => {};
   private onTouched: () => void = () => {};
@@ -141,5 +157,16 @@ export class AppNzInputComponent implements ControlValueAccessor {
 
   onBlur(): void {
     this.onTouched();
+  }
+
+  get inputType(): string {
+    if (this.type === 'password') {
+      return this.isPasswordVisible() ? 'text' : 'password';
+    }
+    return this.type;
+  }
+
+  togglePassword(): void {
+    this.isPasswordVisible.set(!this.isPasswordVisible());
   }
 }

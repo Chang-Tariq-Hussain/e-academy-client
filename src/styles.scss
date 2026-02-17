@@ -1,5 +1,19 @@
 @use './styles/theme-variables.scss';
 
+*,
+ul {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 .full-width-button {
   .ant-btn {
     width: 100% !important;
@@ -45,4 +59,8 @@ nz-form-control {
   margin: 0;
   padding: 0;
   object-fit: cover;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

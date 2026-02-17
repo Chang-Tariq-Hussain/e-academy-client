@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { AppConfig } from '../../core/app-config';
 import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-button-wrapper.component';
 import { AppNzInputComponent } from '../../shared/ui/nz-input-wrapper/nz-input-wrapper.component';
 import {
@@ -30,7 +31,8 @@ import {
 })
 export class Login {
   imageUrl = signal('/assets/login.jpg');
-  logoUrl = signal('/assets/e-academy-logo.png');
+  // logoUrl = signal('/assets/e-academy-logo.png');
+  config = inject(AppConfig);
 
   loginForm = new FormGroup({
     email: new FormControl<string>('', {
