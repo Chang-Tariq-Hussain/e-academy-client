@@ -1,11 +1,14 @@
 @use './styles/theme-variables.scss';
+@use './styles/theme-fonts.scss';
 
 *,
-ul {
+ul,
+body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 .app-container {
   width: 100%;
   max-width: 1200px;
