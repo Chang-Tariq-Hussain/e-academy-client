@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, signal } from '@angular/core';
 import { AppConfig } from '../../../core/app-config';
 import { NzButtonWrapperComponent } from '../../ui/nz-button-wrapper/nz-button-wrapper.component';
 
@@ -8,13 +8,13 @@ import { NzButtonWrapperComponent } from '../../ui/nz-button-wrapper/nz-button-w
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements AfterViewInit {
   config = inject(AppConfig);
 
   navbarItems = signal([
     {
       label: 'Home',
-      link: '#',
+      link: '#home',
       isActive: true,
     },
     {
@@ -38,6 +38,31 @@ export class Header {
       isActive: false,
     },
   ]);
+
+  ngAfterViewInit(): void {
+    this.scrollspy();
+  }
+
+  scrollspy() {
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+
+            this.navbarItems.update((items) =>
+              items.map((item) => ({ ...item, isActive: item.link === `#${id}` })),
+            );
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
 
   setActive(link: string) {
     this.navbarItems.update((items) => {
