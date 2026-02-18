@@ -1,0 +1,12 @@
+<div class="course-card-container cursor-pointer">
+  <img class="course-card-img" [src]="cardData().imageUrl" alt="course image" />
+  <div class="course-card-body">
+    <p class="total-lessons text-small">{{ cardData().totalLessons }} lessons</p>
+    <h3 class="course-card-title">{{ cardData().title }}</h3>
+    <p class="text-small">Instructor: {{ cardData().instructor }}</p>
+  </div>
+  <div class="course-card-footer">
+    <h4 class="price">{{ cardData().price }}</h4>
+    <app-nz-button type="primary" size="large">Enroll</app-nz-button>
+  </div>
+</div>

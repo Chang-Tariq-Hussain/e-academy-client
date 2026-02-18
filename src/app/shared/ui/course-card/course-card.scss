@@ -1,0 +1,35 @@
+.course-card-container {
+  border: 1px solid var(--ant-border-color);
+  border-radius: var(--ant-border-radius-base);
+  padding: 10px;
+  // max-width: 300px;
+  width: 100%;
+  min-height: fit-content;
+
+  .course-card-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--ant-border-radius-base);
+  }
+  .course-card-body {
+    padding: 5px;
+
+    .course-card-title {
+      margin-bottom: 0;
+    }
+  }
+
+  .course-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 0.5rem;
+    .price {
+      color: var(--ant-primary-color);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+  }
+}
