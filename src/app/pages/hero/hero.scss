@@ -1,0 +1,35 @@
+.hero-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: calc(100vh - 130px);
+  .hero-content {
+    flex: 50%;
+    max-width: 600px;
+    // align-self: flex-start;
+    // margin-top: 3rem;
+
+    h3 {
+      font-size: 2rem;
+      color: var(--ant-text-color);
+    }
+
+    p {
+      margin-bottom: 4rem;
+      max-width: 400px;
+    }
+
+    .my-btn {
+      width: 150px;
+      display: inline-block;
+    }
+  }
+  .hero-img {
+    flex: 50%;
+    img {
+      height: 450px;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
