@@ -8,8 +8,12 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--ant-primary-color);
-    padding: 2px;
+    border: 4px solid transparent;
+    padding: 3px;
+
+    background:
+      linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, #4547d2, #6c63ff, #9b5cff) border-box;
   }
 
   .title {

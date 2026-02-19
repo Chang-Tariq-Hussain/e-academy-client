@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { AppConfig } from '../../../core/app-config';
+import { Component, inject, input } from '@angular/core';
+import { AppConfig, ITeamMember } from '../../../core/app-config';
 
 @Component({
   selector: 'app-instructor',
@@ -9,4 +9,5 @@ import { AppConfig } from '../../../core/app-config';
 })
 export class Instructor {
   config = inject(AppConfig);
+  instructorData = input.required<ITeamMember>();
 }

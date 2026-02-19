@@ -1,5 +1,5 @@
 <div class="instructor-container">
-  <img [src]="config.instructor()" alt="Instructor profile" class="instructor-img" />
-  <h4 class="title">John Doe</h4>
-  <p class="text-small text-blue">BS English</p>
+  <img [src]="instructorData().imageUrl" alt="Instructor profile" class="instructor-img" />
+  <h4 class="title">{{ instructorData().title }}</h4>
+  <p class="text-small text-blue">{{ instructorData().qualification }}</p>
 </div>

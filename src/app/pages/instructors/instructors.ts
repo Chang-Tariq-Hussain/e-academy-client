@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AppConfig } from '../../core/app-config';
 import { Instructor } from '../../shared/ui/instructor/instructor';
 
 @Component({
@@ -7,4 +8,6 @@ import { Instructor } from '../../shared/ui/instructor/instructor';
   templateUrl: './instructors.html',
   styleUrl: './instructors.scss',
 })
-export class Instructors {}
+export class Instructors {
+  config = inject(AppConfig);
+}

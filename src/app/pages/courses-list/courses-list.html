@@ -4,7 +4,7 @@
     <h2 class="section-subheading">Structured courses for focused learning</h2>
 
     <div class="cards-grid-container">
-      @for (cardData of cardsData(); track cardData.id) {
+      @for (cardData of config.cardsData(); track cardData.id) {
         <app-course-card [cardData]="cardData"></app-course-card>
       }
     </div>
