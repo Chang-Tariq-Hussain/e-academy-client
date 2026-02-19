@@ -28,7 +28,7 @@ import { AppNzInputComponent } from '../nz-input-wrapper/nz-input-wrapper.compon
       (click)="click.emit($event)"
       [disabled]="disabled()"
       type="htmlType()"
-      class="my-btn"
+      [ngClass]="['my-btn', customClass()]"
     >
       @if (icon()) {
         <span nz-icon [nzType]="icon()"></span>
@@ -53,6 +53,7 @@ export class NzButtonWrapperComponent implements ControlValueAccessor {
   danger = input<boolean>(false);
   disabled = input<boolean>(false);
   icon = input<string>(''); // default empty = no icon
+  customClass = input<string>('');
 
   value = signal('');
 

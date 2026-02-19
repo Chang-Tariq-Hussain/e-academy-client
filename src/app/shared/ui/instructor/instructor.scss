@@ -1,0 +1,24 @@
+.instructor-container {
+  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .instructor-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--ant-primary-color);
+    padding: 2px;
+  }
+
+  .title {
+    margin-bottom: 0;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+}

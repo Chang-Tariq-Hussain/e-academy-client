@@ -26,6 +26,8 @@ export class AppConfig {
     biology: '/assets/Biology.jpg',
   });
 
+  instructor = signal<string>('/assets/team-member.jpg');
+
   setLogo(url: string) {
     this.logoUrl.set(url);
   }
