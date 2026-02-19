@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Clock, LucideAngularModule, MailIcon, Smartphone } from 'lucide-angular';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { AppConfig } from '../../core/app-config';
@@ -17,12 +18,16 @@ import { NzTextareaWrapper } from '../../shared/ui/nz-textarea-wrapper/nz-textar
     NzTextareaWrapper,
     NzButtonWrapperComponent,
     NzGridModule,
+    LucideAngularModule,
   ],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
 export class Contact {
   config = inject(AppConfig);
+  readonly MailIcon = MailIcon;
+  readonly Smartphone = Smartphone;
+  readonly Clock = Clock;
 
   contactForm = new FormGroup({
     fullname: new FormControl<string>('', {

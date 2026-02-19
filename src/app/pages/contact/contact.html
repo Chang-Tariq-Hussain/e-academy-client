@@ -54,9 +54,25 @@
               <app-nz-textarea-wrapper formControlName="message"></app-nz-textarea-wrapper>
             </nz-form-control>
           </nz-form-item>
-
-          <app-nz-button type="primary" size="large" htmlType="submit"> Submit </app-nz-button>
+          <app-nz-button type="primary" size="large" htmlType="submit" customClass="full-width-btn">
+            Submit
+          </app-nz-button>
         </form>
+
+        <div class="contact-detail">
+          <div class="contact-item mail">
+            <i-lucide [img]="MailIcon" class="my-icon"></i-lucide>
+            <p>example@gmail.com</p>
+          </div>
+          <div class="contact-item mail">
+            <i-lucide [img]="Smartphone" class="my-icon"></i-lucide>
+            <p>090078601</p>
+          </div>
+          <div class="contact-item mail">
+            <i-lucide [img]="Clock" class="my-icon"></i-lucide>
+            <p>Monday – Saturday | 9:00 AM – 6:00 PM</p>
+          </div>
+        </div>
       </div>
       <div class="contact-right">
         <img [src]="config.contactImageUrl()" alt="" />
