@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppConfig } from '../../../core/app-config';
 import { NzButtonWrapperComponent } from '../../ui/nz-button-wrapper/nz-button-wrapper.component';
 
@@ -10,6 +11,7 @@ import { NzButtonWrapperComponent } from '../../ui/nz-button-wrapper/nz-button-w
 })
 export class Header implements AfterViewInit {
   config = inject(AppConfig);
+  private router = inject(Router);
 
   navbarItems = signal([
     {
@@ -71,5 +73,13 @@ export class Header implements AfterViewInit {
         isActive: item.link === link,
       }));
     });
+  }
+
+  handleLoginClick() {
+    this.router.navigate(['/login']);
+  }
+
+  handleRegisterClick() {
+    this.router.navigate(['/register']);
   }
 }

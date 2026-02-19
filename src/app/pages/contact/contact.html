@@ -2,5 +2,65 @@
   <section class="app-container contact" id="contact">
     <h4 class="section-heading-pill">Contact Us</h4>
     <h2 class="section-subheading">We’re here to support your learning journey</h2>
+
+    <div class="contact-content">
+      <div class="contact-left">
+        <form
+          nzForm
+          nzLayout="vertical"
+          [formGroup]="contactForm"
+          class="contact-form"
+          (ngSubmit)="onSubmit()"
+        >
+          <nz-form-item>
+            <nz-form-label [nzRequired]="true">Full Name</nz-form-label>
+            <nz-form-control nzHasFeedback [nzValidateStatus]="fullname">
+              <app-nz-input
+                formControlName="fullname"
+                placeholder="Enter your full name"
+              ></app-nz-input>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-row [nzGutter]="16">
+            <!-- Email -->
+            <nz-col xs="24" md="12">
+              <nz-form-item>
+                <nz-form-label [nzRequired]="true">Email</nz-form-label>
+                <nz-form-control nzHasFeedback [nzValidateStatus]="email">
+                  <app-nz-input
+                    formControlName="email"
+                    type="email"
+                    placeholder="your@email.com"
+                  ></app-nz-input>
+                </nz-form-control>
+              </nz-form-item>
+            </nz-col>
+
+            <!-- Phone -->
+            <nz-col xs="24" md="12">
+              <nz-form-item>
+                <nz-form-label [nzRequired]="true">Phone</nz-form-label>
+                <nz-form-control [nzValidateStatus]="phone">
+                  <app-nz-input formControlName="phone" placeholder="0332 2448621"></app-nz-input>
+                </nz-form-control>
+              </nz-form-item>
+            </nz-col>
+          </nz-row>
+
+          <nz-form-item>
+            <nz-form-label>Message</nz-form-label>
+            <nz-form-control [nzValidateStatus]="message">
+              <app-nz-textarea-wrapper formControlName="message"></app-nz-textarea-wrapper>
+            </nz-form-control>
+          </nz-form-item>
+
+          <app-nz-button type="primary" size="large" htmlType="submit"> Submit </app-nz-button>
+        </form>
+      </div>
+      <div class="contact-right">
+        <img [src]="config.contactImageUrl()" alt="" />
+      </div>
+    </div>
   </section>
 </div>

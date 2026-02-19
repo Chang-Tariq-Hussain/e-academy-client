@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppConfig } from '../../core/app-config';
 import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-button-wrapper.component';
 
@@ -10,4 +11,9 @@ import { NzButtonWrapperComponent } from '../../shared/ui/nz-button-wrapper/nz-b
 })
 export class Hero {
   config = inject(AppConfig);
+  private router = inject(Router);
+
+  handleLoginClick() {
+    this.router.navigate(['/login']);
+  }
 }

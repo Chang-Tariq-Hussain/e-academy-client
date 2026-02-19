@@ -25,6 +25,7 @@ export class AppConfig {
   treeImageUrl = signal<string>('/assets/hero-section-tree.jpg');
   aboutImageUrl = signal<string>('/assets/about.jpg');
   instructor = signal<string>('/assets/team-member.jpg');
+  contactImageUrl = signal<string>('/assets/contact.jpg');
 
   subjectImages = signal<SubjectImages>({
     english: '/assets/English.jpg',

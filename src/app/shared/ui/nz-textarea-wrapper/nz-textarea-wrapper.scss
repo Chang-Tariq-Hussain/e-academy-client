@@ -1,0 +1,19 @@
+.my-textarea {
+  width: 100%;
+  border: 1px solid var(--ant-border-color);
+  border-radius: var(--ant-border-radius-base);
+  padding: 10px;
+
+  &:hover {
+    border: 1px solid var(--ant-primary-color);
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--ant-primary-color);
+  }
+
+  &:active {
+    border: 1px solid var(--ant-primary-color);
+  }
+}

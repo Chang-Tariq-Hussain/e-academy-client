@@ -4,7 +4,9 @@
     <h2 class="section-subheading">Dedicated professionals shaping young minds</h2>
     <div class="instructor-listing">
       @for (instructor of config.teamData(); track instructor.id) {
-        <app-instructor [instructorData]="instructor"></app-instructor>
+        @if (instructor) {
+          <app-instructor [instructorData]="instructor"></app-instructor>
+        }
       }
     </div>
   </section>

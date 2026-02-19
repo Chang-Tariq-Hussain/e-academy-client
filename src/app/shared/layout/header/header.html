@@ -19,8 +19,12 @@
       </ul>
     </nav>
     <div class="auth-buttons">
-      <app-nz-button type="default" size="default"> Login </app-nz-button>
-      <app-nz-button type="primary" size="default"> Register </app-nz-button>
+      <app-nz-button type="default" size="default" (click)="handleLoginClick()">
+        Login
+      </app-nz-button>
+      <app-nz-button type="primary" size="default" (click)="handleRegisterClick()">
+        Register
+      </app-nz-button>
     </div>
   </header>
 </section>

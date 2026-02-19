@@ -1,0 +1,20 @@
+<textarea
+  nz-input
+  name="message"
+  value="value()"
+  (input)="onInput($event)"
+  placeholder="Type your message here"
+  [formControlName]="formControlName()"
+  class="my-textarea"
+></textarea>
+
+@if (shouldShowErrors()) {
+  <div class="error-messages">
+    @if (control?.hasError('required')) {
+      <div class="error-message">This field is required</div>
+    }
+    @if (control?.hasError('email')) {
+      <div class="error-message">Please enter a valid email</div>
+    }
+  </div>
+}
