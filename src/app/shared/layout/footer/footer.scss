@@ -1,3 +1,47 @@
 .footer {
-  min-height: 90vh;
+  min-height: 60vh;
+
+  .footer-content {
+    margin-block: 2rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+
+    .footer-logo {
+      p {
+        margin-left: 1rem;
+        max-width: 400px;
+      }
+    }
+    .footer-link-heading {
+      font-size: 1rem;
+    }
+
+    .explore,
+    .company {
+      margin-top: 10px;
+    }
+    ul {
+      li {
+        list-style-type: none;
+        margin-block: 8px;
+
+        a {
+          color: var(--ant-text-color-secondary);
+
+          &:hover {
+            color: var(--ant-primary-color);
+          }
+        }
+      }
+    }
+  }
+}
+.footer-copyrights {
+  border-top: 1px solid var(--ant-border-color);
+  padding: 10px;
+
+  .copyright-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -1,7 +1,15 @@
 .wrapper {
   border-bottom: 1px solid var(--ant-border-color);
+  width: 100%;
 
   .courses-list {
     min-height: 90vh;
+    margin-bottom: 1rem;
+
+    app-nz-button {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
   }
 }

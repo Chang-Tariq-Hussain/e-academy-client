@@ -1,4 +1,65 @@
-<section class="app-container footer">
-  <h4 class="section-heading-pill">E-Academy</h4>
-  <h2 class="section-subheading">A professional e-learning platform for structured education</h2>
-</section>
+<footer class="wrapper">
+  <section class="footer app-container">
+    <h4 class="section-heading-pill">E-Academy</h4>
+    <h2 class="section-subheading">A professional e-learning platform for structured education</h2>
+
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img [src]="config.logoUrl()" alt="" class="logo-img" />
+        <p class="text-small text-gray">
+          Explore new Skills, Elevate your learning. Unlock your potential
+        </p>
+      </div>
+
+      <div class="explore">
+        <h4 class="footer-link-heading">Explore</h4>
+
+        <ul>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#courses">All Courses</a>
+          </li>
+          <li>
+            <a routerLink>Price</a>
+          </li>
+          <li>
+            <a routerLink>Blog</a>
+          </li>
+          <li>
+            <a routerLink>Testimonials</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="company">
+        <h4 class="footer-link-heading">Company</h4>
+        <ul>
+          <li>
+            <a href="#about">About Us</a>
+          </li>
+          <li>
+            <a routerLink>Our Team</a>
+          </li>
+          <li>
+            <a routerLink>Careers</a>
+          </li>
+          <li>
+            <a href="#contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="footer-copyrights">
+    <div class="copyright-wrapper app-container">
+      <div>
+        <app-nz-button type="text">Terms of Service</app-nz-button>
+        <app-nz-button type="text">Privacy Policy</app-nz-button>
+        <app-nz-button type="text">Cookie Settings</app-nz-button>
+      </div>
+      <p>2026 your e-academy platfor. All rights reserved</p>
+    </div>
+  </div>
+</footer>
